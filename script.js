@@ -13,33 +13,65 @@ function writePassword() {
 
 // make var arrays for each user input, populate rondomly while num is < given val, add them to arrays, then randomize
 
-function generatePassword(userlower=3, userupper, usernumb=3, userchar=3, userlength=3){
+function generatePassword(userlower=3, userupper=3, usernumb=3, userchar=3, userlength=12){
   let finalPassword = [];
   let orderedPassword = [];
+  let lowerpicked =[];
+  let upperpicked =[];
+  let numpicked = [];
+  let charpicked = [];
+  // let passwordLength = 12;
+
   const capLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowLetter = "abcdefghijklmnopqrstuvwxyz";
   const numbs = "0123456789";
-  const symbols = "!@#$%^&*()?";
-  let passwordLength = 8;
+  const chars = "!@#$%^&*()?";
 
+  while (finalPassword.length < userlength && lowerpicked.length < userlower){
+    lowerpicked.push(lowLetter[Math.floor(Math.random() * lowLetter.length)]);
+  };
 
-  while (orderedPassword.length < passwordLength){
-    orderedPassword.push(capLetter[Math.floor(Math.random() * capLetter.length)]);
+  while (finalPassword.length < userlength && upperpicked.length < userupper){
+    upperpicked.push(capLetter[Math.floor(Math.random() * capLetter.length)]);
+  };
 
+  while (finalPassword.length < userlength && numpicked.length < usernumb){
+    numpicked.push(numbs[Math.floor(Math.random() * numbs.length)]);
+  };
 
+  while (finalPassword.length < userlength && charpicked.length < userchar){
+    charpicked.push(chars[Math.floor(Math.random() * chars.length)]);
+  };
+  
+  orderedPassword.push.apply(orderedPassword, lowerpicked);
+  orderedPassword.push.apply(orderedPassword, upperpicked);
+  orderedPassword.push.apply(orderedPassword, numpicked);
+  orderedPassword.push.apply(orderedPassword, charpicked);
+
+  // let orderedPasswordString = orderedPassword.join("");
+
+  
+
+  while (finalPassword.length < userlength){
+    var randomIndex = Math.floor(Math.random() * orderedPassword.length);
+    finalPassword.push(orderedPassword[randomIndex]);
+    orderedPassword.splice(randomIndex, 1);
   }
+
+  return finalPassword.join("");
+
+
   // orderedPassword.push(numbs[1]);
   // orderedPassword.push(symbols[1]);
+
   while (finalPassword.length < passwordLength){
     var randomIndex = Math.floor(Math.random() * orderedPassword.length);
     finalPassword.push(orderedPassword[randomIndex]);
     orderedPassword.splice(randomIndex, 1);
   }
 
+  return finalPassword.join("");
 
-    return finalPassword.join("");
-
-  
 };
 
 // Add event listener to generate button
