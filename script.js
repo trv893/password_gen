@@ -7,6 +7,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
   // prevents display of password incompatable entryies
   if (!(userchoosenlength > 7 && userchoosenlength < 129)){
+    $("#alertMessage").css("display","block");
     return false;
   }
 
