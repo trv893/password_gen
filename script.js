@@ -10,14 +10,16 @@ function writePassword() {
 
 }
 
+
 // generates passowrd based on user specified parameters for lowercase, uppercase, numners, special characters and length and sets default parameters if user declines to specifty
-function generatePassword(userlower=2, userupper=2, usernumb=2, userchar=2, userlength=8){
+function generatePassword(userlower=$("#lowercaseUserValue").val(), userupper=$("#uppercaseUserValue").val(), usernumb=$("#numbersUserValue").val(), userchar=$("#specialCharUserValue").val(), userlength= userchoosenlength){
   let finalPassword = [];
   let orderedPassword = [];
   let lowerpicked =[];
   let upperpicked =[];
   let numpicked = [];
   let charpicked = [];
+
 // creates list of all possible characters to include in password
   const capLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowLetter = "abcdefghijklmnopqrstuvwxyz";
@@ -67,7 +69,7 @@ $(generateBtn).on("click", writePassword)
 //   $('#valCustumRange2').text(this.value)
 // });
 
-$("#frmPasswordOptions input").on("change", function(e){
+$("#user_inputs input").on("change", function(e){
   // variables out jquery inputs from event listener
   let $lc = $("#lowercaseUserValue");
   let $uc = $("#uppercaseUserValue");
@@ -84,21 +86,48 @@ $("#frmPasswordOptions input").on("change", function(e){
   let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar)
   // sets slider postion to reflext total number of characters chosen by user
   $('#customRange2').val(totalCharacters);
-  $('#lowercaseUserValue').val((totalCharacters / 4));
-
-
-
-
-  
-  console.log(totalCharacters)
-  console.log(passwordLengthSlider)
-
+  // $('#lowercaseUserValue').val((totalCharacters / 4));
+  // console.log(totalCharacters)
 });
 
 
-$("#lowercaseUserValue").on("change",function(f){
-  // $('#valCustumRange2').text(this.value);
-  $('#customRange2').val(this.value)
+$("#slider").on("change", function(e){
+  let $passwordLengthSlider = $("#customRange2")
+
+  let passwordLengthSlider = $passwordLengthSlider.val();
+
+  let equalCharacterCalcFromSlider = parseFloat(passwordLengthSlider) / 4;
+
+  $('#lowercaseUserValue').val(equalCharacterCalcFromSlider);
+  $('#uppercaseUserValue').val(equalCharacterCalcFromSlider);
+  $('#numbersUserValue').val(equalCharacterCalcFromSlider);
+  $('#specialCharUserValue').val(equalCharacterCalcFromSlider);
+  console.log(equalCharacterCalcFromSlider)
+});
+
+let userchoosenlength = 8;
+$("#frmPasswordOptions").on("change",function(e){
+  let $lc = $("#lowercaseUserValue");
+  let $uc = $("#uppercaseUserValue");
+  let $num = $("#numbersUserValue");
+  let $specchar = $("#specialCharUserValue")
+
+  let lcval = $lc.val();
+  let ucval = $uc.val();
+  let numval = $num.val();
+  let specchar = $specchar.val();
+
+  let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar);
+
+  $("#valCustumRange2").text(totalCharacters);
+  userchoosenlength = totalCharacters;
+  return userchoosenlength;
 });
 
 
+$("#updatePassowrd").on("click", writePassword());
+
+$('#generate').one('click', function(e){
+  $("#userInputs").css("display","block")
+
+});
