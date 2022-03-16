@@ -8,8 +8,7 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
-
+gi
 
 // generates passowrd based on user specified parameters for lowercase, uppercase, numners, special characters and length and sets default parameters if user declines to specifty
 function generatePassword(userlower=$("#lowercaseUserValue").val(), userupper=$("#uppercaseUserValue").val(), usernumb=$("#numbersUserValue").val(), userchar=$("#specialCharUserValue").val(), userlength= userchoosenlength){
