@@ -5,6 +5,10 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  // prevents display of password incompatable entryies
+  if (!(userchoosenlength > 7 && userchoosenlength < 129)){
+    return false;
+  }
 
   passwordText.value = password;
 }
@@ -17,7 +21,6 @@ function generatePassword(userlower=$("#lowercaseUserValue").val(), userupper=$(
   let upperpicked =[];
   let numpicked = [];
   let charpicked = [];
-
 // creates list of all possible characters to include in password
   const capLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowLetter = "abcdefghijklmnopqrstuvwxyz";
@@ -100,23 +103,31 @@ $("#slider").on("change", function(e){
 let userchoosenlength = 8;
 // adds event listener for changes in entire form of password options
 $("#frmPasswordOptions").on("change",function(e){
-  // variables out jquery array of user selected values for password options
-  let $lc = $("#lowercaseUserValue");
-  let $uc = $("#uppercaseUserValue");
-  let $num = $("#numbersUserValue");
-  let $specchar = $("#specialCharUserValue")
-// selects value from jquery array
-  let lcval = $lc.val();
-  let ucval = $uc.val();
-  let numval = $num.val();
-  let specchar = $specchar.val();
-// calculates the total characters of all passwword options which together relflect totoal passowrd length
-  let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar);
-// displays password length calculated by totalCharacters in <span> in html
-  $("#valCustumRange2").text(totalCharacters);
-  // sets global variable userchoosenlength to the total number of chosen characters
-  userchoosenlength = totalCharacters;
-  return userchoosenlength;
+    // variables out jquery array of user selected values for password options
+    let $lc = $("#lowercaseUserValue");
+    let $uc = $("#uppercaseUserValue");
+    let $num = $("#numbersUserValue");
+    let $specchar = $("#specialCharUserValue")
+  // selects value from jquery array
+    let lcval = $lc.val();
+    let ucval = $uc.val();
+    let numval = $num.val();
+    let specchar = $specchar.val();
+  // calculates the total characters of all passwword options which together relflect totoal passowrd length
+    let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar);
+  // displays password length calculated by totalCharacters in <span> in html
+    $("#valCustumRange2").text(totalCharacters);
+    // sets global variable userchoosenlength to the total number of chosen characters
+    userchoosenlength = totalCharacters;
+    // checks that user inputs are within acceptance criteria and displays alery with criteria if not
+    if (!(userchoosenlength > 7 && userchoosenlength < 129)){
+      $("#alertMessage").css("display","block");
+      return false;
+    }
+    
+    return userchoosenlength;
+
+
 });
 
 // calls writePassword when user clicks the generate password button to initiate the generation of a new password
@@ -126,3 +137,10 @@ $("#updatePassowrd").on("click", writePassword());
 $('#generate').one('click', function(e){
   $("#userInputs").css("display","block")
 });
+
+// if (userchoosenlength > 7 && userchoosenlength < 129){
+
+  
+// } else {
+//   $("#alertMessage").css("display","block")
+// }
