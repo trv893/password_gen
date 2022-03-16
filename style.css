@@ -3,10 +3,9 @@
   font-family: sans-serif;
 }
 
-/* sets the background color and height of page */
+/* sets the background color of page */
 body {
   background-color: #f9fbfd;
-  height: 2000px;
 }
 
 /*sets style of text area where generated passowrd is displated. including dimencions, padding and border style */
