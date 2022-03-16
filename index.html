@@ -12,10 +12,10 @@
 </head>
 
 <body>
-  <main class="container-fluid">
-    <header">
+  <header">
       <h1 class="text-center my-5">Password Generator</h1>
     </header>
+  <main class="container-fluid">
       <section class="container border border-1 shadow p-3 mb-1 bg-body rounded">
         <div class="text-center">
           <h2 class="border-bottom border-2 pb-1">Generate a Password</h2>
@@ -31,16 +31,20 @@
         </div>
         <div class="" aria-labelledby="generate" id="userInputs">
           <form class="px-4 py-3" id="frmPasswordOptions">
-            <div class="pt-1 pb-4" id="slider">
+            <fieldset class="pt-1 pb-4" id="slider">
               <label for="customRange2" class="form-label"></label>
               <input type="range" class="form-range" min="8" max="128" step="8" id="customRange2">
-              <div class="container d-inline-flex">
+              <div class="container d-flex justify-content-evenly">
                 <h3>Passowrd Length:
                   <span id="valCustumRange2">8</span>
                 </h3>
+                <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                  <strong>Password must be at least 8 characters</strong> Cannot select negative number!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
               </div>
-            </div>
-            <div id="user_inputs">
+            </fieldset>
+            <fieldset id="user_inputs">
               <div class="mb-3">
                 <label for="lowercaseUserValue" class="form-label">Lowercase :</label>
                 <input type="number" class="form-control" id="lowercaseUserValue"
@@ -61,7 +65,7 @@
                 <input type="number" class="form-control" id="specialCharUserValue"
                   placeholder="Number of lowercase characters" min="2" max="128" value="2">
               </div>
-            </div>
+            </fieldset>
           </form>
         </div>
       </section>
