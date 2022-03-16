@@ -11,7 +11,7 @@ function writePassword() {
 }
 
 // generates passowrd based on user specified parameters for lowercase, uppercase, numners, special characters and length and sets default parameters if user declines to specifty
-function generatePassword(userlower=3, userupper=3, usernumb=3, userchar=3, userlength=12){
+function generatePassword(userlower=2, userupper=2, usernumb=2, userchar=2, userlength=8){
   let finalPassword = [];
   let orderedPassword = [];
   let lowerpicked =[];
@@ -59,4 +59,46 @@ function generatePassword(userlower=3, userupper=3, usernumb=3, userchar=3, user
 };
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// generateBtn.addEventListener("click", writePassword);
+
+$(generateBtn).on("click", writePassword)
+
+// $("#customRange2").on("change",function(e){
+//   $('#valCustumRange2').text(this.value)
+// });
+
+$("#frmPasswordOptions input").on("change", function(e){
+  // variables out jquery inputs from event listener
+  let $lc = $("#lowercaseUserValue");
+  let $uc = $("#uppercaseUserValue");
+  let $num = $("#numbersUserValue");
+  let $specchar = $("#specialCharUserValue")
+  let $passwordLengthSlider = $("#customRange2")
+  // grabs user input from jquery variables
+  let lcval = $lc.val();
+  let ucval = $uc.val();
+  let numval = $num.val();
+  let specchar = $specchar.val();
+  let passwordLengthSlider = $passwordLengthSlider.val();
+  // calculates totals user selected values for all character options by parsing the string into and int and adding
+  let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar)
+  // sets slider postion to reflext total number of characters chosen by user
+  $('#customRange2').val(totalCharacters);
+  $('#lowercaseUserValue').val((totalCharacters / 4));
+
+
+
+
+  
+  console.log(totalCharacters)
+  console.log(passwordLengthSlider)
+
+});
+
+
+$("#lowercaseUserValue").on("change",function(f){
+  // $('#valCustumRange2').text(this.value);
+  $('#customRange2').val(this.value)
+});
+
+
