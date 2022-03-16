@@ -7,8 +7,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
-gi
+}
 
 // generates passowrd based on user specified parameters for lowercase, uppercase, numners, special characters and length and sets default parameters if user declines to specifty
 function generatePassword(userlower=$("#lowercaseUserValue").val(), userupper=$("#uppercaseUserValue").val(), usernumb=$("#numbersUserValue").val(), userchar=$("#specialCharUserValue").val(), userlength= userchoosenlength){
@@ -60,14 +59,9 @@ function generatePassword(userlower=$("#lowercaseUserValue").val(), userupper=$(
 };
 
 // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
-
 $(generateBtn).on("click", writePassword)
 
-// $("#customRange2").on("change",function(e){
-//   $('#valCustumRange2').text(this.value)
-// });
-
+// enables user manual inputs to effect slider position and display password length
 $("#user_inputs input").on("change", function(e){
   // variables out jquery inputs from event listener
   let $lc = $("#lowercaseUserValue");
@@ -85,48 +79,50 @@ $("#user_inputs input").on("change", function(e){
   let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar)
   // sets slider postion to reflext total number of characters chosen by user
   $('#customRange2').val(totalCharacters);
-  // $('#lowercaseUserValue').val((totalCharacters / 4));
-  // console.log(totalCharacters)
 });
 
-
+// eneacts changes to user manual inputs so they reflect slider position
 $("#slider").on("change", function(e){
+  // sets jquery variable for slider position 
   let $passwordLengthSlider = $("#customRange2")
-
+  // obtains value from jquery array of slider position
   let passwordLengthSlider = $passwordLengthSlider.val();
-
+  // divides the value of the position of the slider by 4
   let equalCharacterCalcFromSlider = parseFloat(passwordLengthSlider) / 4;
-
+// sets each value of password character options so that their sum equals the position of slider
   $('#lowercaseUserValue').val(equalCharacterCalcFromSlider);
   $('#uppercaseUserValue').val(equalCharacterCalcFromSlider);
   $('#numbersUserValue').val(equalCharacterCalcFromSlider);
   $('#specialCharUserValue').val(equalCharacterCalcFromSlider);
-  console.log(equalCharacterCalcFromSlider)
 });
 
+// sets initial passwoord length
 let userchoosenlength = 8;
+// adds event listener for changes in entire form of password options
 $("#frmPasswordOptions").on("change",function(e){
+  // variables out jquery array of user selected values for password options
   let $lc = $("#lowercaseUserValue");
   let $uc = $("#uppercaseUserValue");
   let $num = $("#numbersUserValue");
   let $specchar = $("#specialCharUserValue")
-
+// selects value from jquery array
   let lcval = $lc.val();
   let ucval = $uc.val();
   let numval = $num.val();
   let specchar = $specchar.val();
-
+// calculates the total characters of all passwword options which together relflect totoal passowrd length
   let totalCharacters = parseInt(lcval) + parseInt(ucval) + parseInt(numval) + parseInt(specchar);
-
+// displays password length calculated by totalCharacters in <span> in html
   $("#valCustumRange2").text(totalCharacters);
+  // sets global variable userchoosenlength to the total number of chosen characters
   userchoosenlength = totalCharacters;
   return userchoosenlength;
 });
 
-
+// calls writePassword when user clicks the generate password button to initiate the generation of a new password
 $("#updatePassowrd").on("click", writePassword());
 
+// enables display of passowrd options on single click of generate button so that future clicks will not effect the display of user input options
 $('#generate').one('click', function(e){
   $("#userInputs").css("display","block")
-
 });

@@ -1,13 +1,15 @@
+/* sets the font for the whole page */
 * {
   font-family: sans-serif;
 }
 
-
-main {
+/* sets the background color and height of page */
+body {
   background-color: #f9fbfd;
   height: 2000px;
 }
 
+/*sets style of text area where generated passowrd is displated. including dimencions, padding and border style */
 #password {
   height: 100%;
   width: 100%;
@@ -19,21 +21,20 @@ main {
   border-image: initial;
   border-radius: 6px;
   text-align: center;
-  padding-top: 30px;
-  
+  padding-top: 30px; 
 }
 
+/* sets style of generate button including margins, padding, text alignment, courser chaange, rounded corners */
 #generate {
   margin: 16px 16px 16px 20px;
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
   border-radius: 25px;
-  cursor: pointer;
 }
 
+/* hides the user input options until changed later by jquery to display on initial click as per clients request */
 #userInputs {
   display: none;
-
 }
 
