@@ -139,9 +139,3 @@ $('#generate').one('click', function(e){
   $("#userInputs").css("display","block")
 });
 
-// if (userchoosenlength > 7 && userchoosenlength < 129){
-
-  
-// } else {
-//   $("#alertMessage").css("display","block")
-// }
